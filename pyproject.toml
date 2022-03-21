@@ -90,7 +90,7 @@ exclude_lines = [
 [tool.mypy]
 disallow_untyped_defs = true
 ignore_missing_imports = true
-files = ["tabler_icons", "examples", "tests"]
+files = ["tabler_icons", "tests"]
 
 [tool.pytest.ini_options]
 minversion =  "7.0"

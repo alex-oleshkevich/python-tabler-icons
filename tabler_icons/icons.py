@@ -9,8 +9,13 @@ ARCHIVE_NAME = THIS_DIR / 'archive.zip'
 PATH_ATTRS = {'stroke-linecap', 'stroke-linejoin', 'stroke-width', 'vector-effect'}
 
 
-class IconDoesNotExists(Exception):
+class IconDoesNotExists(Exception):  # pragma: nocover
     ...
+
+
+class Stringable(typing.Protocol):  # pragma: nocover
+    def __str__(self) -> str:
+        ...
 
 
 @lru_cache(maxsize=128)
@@ -22,7 +27,7 @@ def extract_icon(name: str) -> str:
             raise IconDoesNotExists(f'The icon {name} does not exist.')
 
 
-def get_icon(name: str, size: typing.Union[str, int] = 20, **svg_attrs: str) -> str:
+def get_icon(name: str, size: Stringable = 20, **svg_attrs: Stringable) -> str:
     contents = extract_icon(name)
     svg = ElementTree.fromstring(contents)
     for node in svg.iter():
